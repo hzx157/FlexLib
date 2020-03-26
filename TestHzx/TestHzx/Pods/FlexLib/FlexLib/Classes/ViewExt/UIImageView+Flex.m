@@ -13,7 +13,7 @@
 #import "../FlexUtils.h"
 #import "../FlexNode.h"
 #import <objc/runtime.h>
-#import <SDWebImage/UIImageView+WebCache.h>
+
 
 @implementation UIImageView (Flex)
 
@@ -21,13 +21,6 @@ FLEXSET(source)
 {
     UIImage* img = [UIImage imageNamed:sValue inBundle:[owner bundleForImages] compatibleWithTraitCollection:nil];
     self.image = img ;
-}
-FLEXSET(sdsource)
-{
-    NSLog(@"");
-    UIImage* img = [UIImage imageNamed:sValue inBundle:[owner bundleForImages] compatibleWithTraitCollection:nil];
-    [self sd_setImageWithURL:[NSURL URLWithString:sValue] placeholderImage:img];
-  
 }
 FLEXSET(highlightSource)
 {

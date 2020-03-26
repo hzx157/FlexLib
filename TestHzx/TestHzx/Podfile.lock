@@ -1,0 +1,34 @@
+PODS:
+  - FlexLib (2.4.1):
+    - FlexLib/no-arc (= 2.4.1)
+    - FlexLib/osx-no-arc (= 2.4.1)
+    - Yoga (= 1.14.0)
+  - FlexLib/no-arc (2.4.1):
+    - Yoga (= 1.14.0)
+  - FlexLib/osx-no-arc (2.4.1):
+    - Yoga (= 1.14.0)
+  - Yoga (1.14.0)
+
+DEPENDENCIES:
+  - FlexLib (from `https://github.com/hzx157/FlexLib.git`)
+
+SPEC REPOS:
+  trunk:
+    - Yoga
+
+EXTERNAL SOURCES:
+  FlexLib:
+    :git: https://github.com/hzx157/FlexLib.git
+
+CHECKOUT OPTIONS:
+  FlexLib:
+    :commit: 0841d9918cce29ad8fd44ef1c51e5d80fe3384c6
+    :git: https://github.com/hzx157/FlexLib.git
+
+SPEC CHECKSUMS:
+  FlexLib: 21fc613fbff8db42ec73abeb7a608675628fb66d
+  Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
+
+PODFILE CHECKSUM: c347c0546c3b5038a42df50319d466688d6e39ca
+
+COCOAPODS: 1.8.4

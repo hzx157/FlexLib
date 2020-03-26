@@ -52,6 +52,8 @@ It's a layout framework based on yoga engine. The main purpose is to provide eas
   end
 
   s.dependency 'Yoga', '1.14.0'
+  s.dependency 'SDWebImage'
+  
   s.library = 'xml2'
   s.xcconfig = { 'HEADER_SEARCH_PATHS' => '/usr/include/libxml2' }
 end
