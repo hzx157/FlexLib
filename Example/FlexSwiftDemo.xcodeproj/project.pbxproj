@@ -317,11 +317,13 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-FlexSwiftDemo/Pods-FlexSwiftDemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FlexLib-framework/FlexLib.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage-framework/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Yoga-framework/yoga.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FlexLib.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/yoga.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

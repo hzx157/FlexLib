@@ -37,6 +37,9 @@
   "dependencies": {
     "Yoga": [
       "1.14.0"
+    ],
+    "SDWebImage": [
+
     ]
   },
   "libraries": "xml2",

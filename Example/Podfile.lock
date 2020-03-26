@@ -3,11 +3,17 @@ PODS:
   - FlexLib (2.4.1):
     - FlexLib/no-arc (= 2.4.1)
     - FlexLib/osx-no-arc (= 2.4.1)
+    - SDWebImage
     - Yoga (= 1.14.0)
   - FlexLib/no-arc (2.4.1):
+    - SDWebImage
     - Yoga (= 1.14.0)
   - FlexLib/osx-no-arc (2.4.1):
+    - SDWebImage
     - Yoga (= 1.14.0)
+  - SDWebImage (5.5.2):
+    - SDWebImage/Core (= 5.5.2)
+  - SDWebImage/Core (5.5.2)
   - Specta (1.0.7)
   - Yoga (1.14.0)
 
@@ -18,10 +24,12 @@ DEPENDENCIES:
   - Yoga (= 1.14.0)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Expecta
     - Specta
     - Yoga
+  trunk:
+    - SDWebImage
 
 EXTERNAL SOURCES:
   FlexLib:
@@ -29,10 +37,11 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Expecta: 3b6bd90a64b9a1dcb0b70aa0e10a7f8f631667d5
-  FlexLib: 21fc613fbff8db42ec73abeb7a608675628fb66d
+  FlexLib: f3a84457c1b381c3c8a26ce55f84d4feda14bb57
+  SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
 PODFILE CHECKSUM: 1a850782b74573e1035fd795aff5ff424bd1a378
 
-COCOAPODS: 1.7.2
+COCOAPODS: 1.8.4
