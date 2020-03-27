@@ -24,8 +24,11 @@ FLEXSET(source)
 }
 FLEXSET(sdsource)
 {
-    NSLog(@"");
+    
     UIImage* img = [UIImage imageNamed:sValue inBundle:[owner bundleForImages] compatibleWithTraitCollection:nil];
+    if(!img){
+        
+    }
     [self sd_setImageWithURL:[NSURL URLWithString:sValue] placeholderImage:img];
   
 }

@@ -16,10 +16,11 @@
 #import "ViewExt/UIView+Flex.h"
 #import "FlexUtils.h"
 #import "FlexStyleMgr.h"
-
+#import <objc/runtime.h>
 static void* gObserverHidden    = &gObserverHidden;
 static void* gObserverText = &gObserverText;
 static void* gObserverAttrText  = &gObserverAttrText;
+static const void *kFlexVieNodeAssociatedKey = &kFlexVieNodeAssociatedKey;
 
 static NSInteger _compareInputView(UIView * _Nonnull f,
                                    UIView * _Nonnull s,
@@ -69,6 +70,15 @@ static NSInteger _compareInputView(UIView * _Nonnull f,
         parent = parent.superview;
     }
     return nil;
+}
+- (FlexNode *)node
+{
+    FlexNode *attrs = objc_getAssociatedObject(self, kFlexVieNodeAssociatedKey);
+ 
+    return attrs;
+}
+-(void)setNode:(FlexNode *)node{
+        objc_setAssociatedObject(self, kFlexVieNodeAssociatedKey, node, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 -(NSObject*)owner
 {

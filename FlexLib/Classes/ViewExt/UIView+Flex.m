@@ -15,6 +15,7 @@
 
 static const void *kFlexViewAttrAssociatedKey = &kFlexViewAttrAssociatedKey;
 
+
 @implementation FlexViewAttrs
 
 @end
@@ -49,6 +50,7 @@ static NameValue _gcontentModes[] =
     
     return attrs;
 }
+
 
 #pragma mark - override
 

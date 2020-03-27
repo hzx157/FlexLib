@@ -45,6 +45,8 @@ FlexLoadMethod FlexGetLoadMethod(void);
 void FlexSetResourceSuffix(NSString* resourceSuffix);
 NSString* FlexGetResourceSuffix(void);
 
+//是否使用网络请求回来的文件
+void FlexRestoreIsNetSetter(BOOL isNet);
 // 恢复预览设置，仅在debug下生效
 void FlexRestorePreviewSetting(void);
 

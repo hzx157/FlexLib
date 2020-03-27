@@ -22,7 +22,7 @@
 
 @property(nonatomic,readonly) FlexRootView* rootView;
 @property(nonatomic,readonly) NSObject* owner;
-
+@property (nonatomic, strong) FlexNode* node;
 +(UIView*)buildFlexView:(Class)viewCls
                  Layout:(NSArray<NSString*>*)layoutAttrs
               ViewAttrs:(NSArray<NSString*>*)viewAttrs;

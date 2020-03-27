@@ -897,8 +897,14 @@ void FlexLoadFlexIndex(void)
     }
 }
 
+void FlexRestoreIsNetSetter(BOOL isNet){
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:isNet forKey:FLEXONLINELOAD];
+}
 void FlexRestorePreviewSetting(void)
 {
+    
+  
 #ifdef DEBUG
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
     

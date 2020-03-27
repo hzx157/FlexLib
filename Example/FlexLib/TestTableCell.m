@@ -27,7 +27,16 @@
     [super awakeFromNib];
     // Initialization code
 }
-
+//+(void)load{
+//
+//    NSLog(@"load---load--load=%@",self);
+//}
+//+(void)initialize{
+//    
+//    
+//    
+//      NSLog(@"initialize---initialize--class=%@",self);
+//}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

@@ -17,7 +17,7 @@
 #import "FlexRootView.h"
 #import "FlexModalView.h"
 #import "ViewExt/UIView+Flex.h"
-
+#import <objc/runtime.h>
 #define VIEWCLSNAME     @"viewClsName"
 #define NAME            @"name"
 #define ONPRESS         @"onPress"
@@ -39,7 +39,7 @@ static FlexScaleFunc gScaleFunc = scaleLinear ;
 static NSString* gResourceSuffix = nil;
 
 #ifdef DEBUG
-static BOOL gbUserCache = NO;
+static BOOL gbUserCache = YES;
 #else
 static BOOL gbUserCache = YES;
 #endif
@@ -377,6 +377,19 @@ void FlexApplyLayoutParam(YGLayout* layout,
 {
     return [NSString stringWithFormat:@"FlexNode: %@, %@, %@, %@, %@", self.viewClassName, self.layoutParams, self.viewAttrs, self.children, self.onPress];
 }
+id getter(id object,SEL _cmd1){
+    NSString *key = NSStringFromSelector(_cmd1);
+    return objc_getAssociatedObject(object, (__bridge const void * _Nonnull)(key));
+}
+void setter(id object,SEL _cmd1,id newValue){
+    
+    
+    NSString *key = NSStringFromSelector(_cmd1);
+    key = [[key substringWithRange:NSMakeRange(3, key.length-4)] lowercaseString];
+    NSLog(@"setter方法是-%@----%@----%@",key,newValue,NSStringFromClass([object class]));
+    
+    objc_setAssociatedObject(object, (__bridge const void * _Nonnull)(key), newValue, OBJC_ASSOCIATION_RETAIN);
+}
 
 -(UIView*)buildViewTree:(NSObject*)owner
                RootView:(FlexRootView*)rootView
@@ -413,8 +426,48 @@ void FlexApplyLayoutParam(YGLayout* layout,
     }
     
     if(self.name.length>0){
+        
+        
+        BOOL isName = YES;
+
+        if (!class_getProperty(owner.class, self.name.UTF8String)) {
+            isName = NO;
+        }
+
+        
+        if(!isName){
+            
+          
+//             objc_property_attribute_t type = { "T", [[NSString stringWithFormat:@"@\"%@\"",NSStringFromClass([cls class])] UTF8String] }; //type
+            objc_property_attribute_t type = { "T", [[NSString stringWithFormat:@"@\"%@\"",NSStringFromClass([cls class])] UTF8String] }; //type
+//            objc_property_attribute_t type = { "T", "@\"NSString\""}; //type
+                        objc_property_attribute_t ownership0 = { "&", "N" }; // C = copy
+//                        objc_property_attribute_t ownership = { "N", "" }; //N = nonatomic
+//                        objc_property_attribute_t backingivar  = { "V", [[NSString stringWithFormat:@"_%@", self.name] UTF8String] };  //variable name
+            objc_property_attribute_t backingivar  = { "V", [[NSString stringWithFormat:@"%@",self.name] UTF8String]};  //variable name
+                        objc_property_attribute_t attrs[] = { type,ownership0,backingivar};//这个数组一定要按照此顺序才行
+                        BOOL add = class_addProperty([owner class], [[NSString stringWithFormat:@"%@",self.name] UTF8String], attrs, 3);
+                        if (add) {
+//                            NSLog(@"添加成功\n");
+                        }else{
+//                            NSLog(@"添加失败\n");
+                        }
+
+                        NSString *sets = [NSString stringWithFormat:@"set%@",[self.name capitalizedString]];
+                     BOOL isGet = class_addMethod([owner class], NSSelectorFromString(self.name), (IMP)getter, "@@:");
+                      BOOL isSet =  class_addMethod([owner class], NSSelectorFromString(sets), (IMP)setter, "v@:@");
+//            setter(owner, NSSelectorFromString(self.name), @"11");
+//            NSLog(@"新增方法是否成功%d,,%d---%@----%@----%@",isGet,isSet,sets,self.name,NSStringFromClass([owner class]));
+
+                     
+        }
+         
+
+        
+
         @try{
             view.viewAttrs.name = self.name ;
+            
             
             if([owner needBindVariable]){
                 [owner setValue:view forKey:self.name];
@@ -473,6 +526,8 @@ void FlexApplyLayoutParam(YGLayout* layout,
                 for(FlexAttr* styleAttr in ary)
                 {
                     FlexSetViewAttr(view, styleAttr.name, styleAttr.value,owner);
+//                    [[view valueForKey:owner] setValue:styleAttr.value forKey:styleAttr.name];
+                   
                 }
                 
             }else{
@@ -486,6 +541,7 @@ void FlexApplyLayoutParam(YGLayout* layout,
         NSArray* children = self.children ;
         for(FlexNode* node in children){
             UIView* child = [node buildViewTree:owner RootView:rootView] ;
+            
             if(child!=nil && ![child isKindOfClass:[FlexModalView class]])
             {
                 [view addSubview:child];
@@ -502,7 +558,7 @@ void FlexApplyLayoutParam(YGLayout* layout,
     
     [view postCreate];
     [owner postCreateView:view];
-    
+    view.node = self;
     return view;
 }
 
@@ -824,6 +880,24 @@ NSData* FlexFetchHttpRes(NSString* url,
 }
 NSData* FlexFetchLayoutFile(NSString* flexName,NSError** outError)
 {
+    
+    if(flexName.length == 0){
+        NSLog(@"Flexbox: preview base flexName not set");
+        return nil;
+    }
+     flexName = [NSString stringWithFormat:@"%@.xml",flexName];
+    NSString *path = [[FlexNode getCacheDir] stringByAppendingPathComponent:flexName];
+    NSError *error;
+    NSData *data = [[NSData alloc]initWithContentsOfFile:path options:NSDataReadingMapped error:&error];
+    if(error != nil){
+        NSLog(@"--FlexFetchLayoutFile----%@",error);
+        return nil;
+    }else{
+        return data;
+    }
+    
+    
+    
     if(gBaseUrl.length==0){
         NSLog(@"Flexbox: preview base url not set");
         return nil;
@@ -888,6 +962,7 @@ void FlexSetFlexIndex(NSDictionary* resIndex)
         [NSKeyedArchiver archiveRootObject:resIndex toFile:sFilePath];
     }
 }
+
 void FlexLoadFlexIndex(void)
 {
     NSString* sFilePath = [FlexNode getCacheDir];
@@ -902,6 +977,10 @@ void FlexLoadFlexIndex(void)
     }
 }
 
+void FlexRestoreIsNetSetter(BOOL isNet){
+    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:isNet forKey:FLEXONLINELOAD];
+}
 void FlexRestorePreviewSetting(void)
 {
 #ifdef DEBUG
