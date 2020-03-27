@@ -40,7 +40,7 @@ static NSInteger _compareInputView(UIView * _Nonnull f,
 }
 
 @implementation UIView(FlexPublic)
-
+//@synthesize nodeDeatil
 +(UIView*)buildFlexView:(Class)viewCls
                  Layout:(NSArray<NSString*>*)layoutAttrs
               ViewAttrs:(NSArray<NSString*>*)viewAttrs
@@ -71,13 +71,16 @@ static NSInteger _compareInputView(UIView * _Nonnull f,
     }
     return nil;
 }
-- (FlexNode *)node
+- (FlexNode *)nodeDeatil
 {
     FlexNode *attrs = objc_getAssociatedObject(self, kFlexVieNodeAssociatedKey);
- 
+    if(!attrs){
+        attrs = [[FlexNode alloc]init];
+        objc_setAssociatedObject(self, kFlexVieNodeAssociatedKey, attrs, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
     return attrs;
 }
--(void)setNode:(FlexNode *)node{
+-(void)setNodeDeatil:(FlexNode *)node{
         objc_setAssociatedObject(self, kFlexVieNodeAssociatedKey, node, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 -(NSObject*)owner

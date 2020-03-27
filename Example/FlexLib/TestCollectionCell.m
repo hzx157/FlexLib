@@ -119,6 +119,8 @@
 -(void)setText:(NSString*)text
 {
 
+    NSLog(@"--------%@",[self findByName:@"label"].nodeDeatil.name);
+    
     NSLog(@"%@--%@",[self findByName:@"label"], NSStringFromClass([self findByName:@"label"].class));
     ((UILabel *)[self findByName:@"label"]).text = text;
 //    NSLog(@"%@", [self findByName:@"image"]);

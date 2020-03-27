@@ -22,13 +22,6 @@ static void* gObserverFrame         = &gObserverFrame;
 @end
 
 @implementation FlexBaseTableCell
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-    }
-    return self;
-}
 
 -(void)internalInit:(NSString*)flexName
 {

@@ -558,7 +558,7 @@ void setter(id object,SEL _cmd1,id newValue){
     
     [view postCreate];
     [owner postCreateView:view];
-    view.node = self;
+    view.nodeDeatil = self;
     return view;
 }
 
