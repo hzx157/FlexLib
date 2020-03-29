@@ -734,7 +734,8 @@ void setter(id object,SEL _cmd1,id newValue){
     if(xmlDirName){  //先进行判断远程有没有下载下来的文件夹，需要本地更新
        
         NSString *fileName = [flexName stringByAppendingString:@".xml"];
-        NSString *documentPath = [[self getCacheDir] stringByAppendingPathComponent:[xmlDirName stringByAppendingPathComponent:fileName]];
+        fileName = [xmlDirName stringByAppendingPathComponent:fileName];
+        NSString *documentPath = [[self getCacheDir] stringByAppendingPathComponent:fileName];
         NSFileManager* manager=[NSFileManager defaultManager];
         if([manager fileExistsAtPath:documentPath]){
             NSError *error;
@@ -747,7 +748,10 @@ void setter(id object,SEL _cmd1,id newValue){
                                       dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                                       ^{
                                           [FlexNode storeToCache:flexName Node:node]; //存h缓存
-                                          [manager removeItemAtPath:documentPath error:NULL]; //删除远程的xml
+//                                               dispatch_async(dispatch_get_main_queue(), ^{
+                                                    [manager removeItemAtPath:documentPath error:NULL]; //删除远程的xml
+//                                               });
+                                         
                                       });
                    }
                 return node;
@@ -1033,6 +1037,8 @@ void FlexRestorePreviewSetting(void)
 void FlexSetDownloadDir(NSString* xmlDir,NSString* imgDir){
     xmlDirName = xmlDir;
     imgDirName = imgDir;
+    [[NSUserDefaults standardUserDefaults]setObject:imgDir forKey:FLEXIMGDIR];
+    [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 void FlexSetLoadFunc(FlexLoadMethod loadFrom)

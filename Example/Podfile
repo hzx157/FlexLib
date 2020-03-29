@@ -6,10 +6,11 @@ target 'FlexLib_Example' do
   xcodeproj ‘FlexLib.xcodeproj'
   pod 'FlexLib', :path => '../'
   pod 'Yoga', '1.14.0'
+    pod 'SSZipArchive'
 
   target 'FlexLib_Tests' do
     inherit! :search_paths
-
+ 
   pod 'Specta'
   pod 'Expecta'
   end

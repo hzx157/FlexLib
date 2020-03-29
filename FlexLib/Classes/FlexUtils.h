@@ -91,6 +91,8 @@ self.propName = n;                        \
 #define IS_PAD (UI_USER_INTERFACE_IDIOM()== UIUserInterfaceIdiomPad)
 
 
+void FlexColorDictionary(NSDictionary *dict);
+
 NSBundle* FlexBundle(void);
 
 FlexLanuage FlexGetLanguage(void);
@@ -108,8 +110,11 @@ int NSString2GroupInt(NSString* s,
                       NameValue table[],
                       int total);
 
-// 字符串转换成颜色值，格式：black or #rrggbb or #aarrggbb
+// 字符串转换成颜色值，格式：black or #rrggbb or #aarrggbb  这里添加了暗黑模式
 UIColor* colorFromString(NSString* clr,NSObject* owner);
+
+// 字符串转换成颜色值，格式：black or #rrggbb or #aarrggbb
+UIColor* colorFromStringToTraitCollection(NSString* clr,NSObject* owner);
 
 // eg: white/black/....
 UIColor* systemColor(NSString* clr);
@@ -123,6 +128,8 @@ BOOL String2BOOL(NSString* s);
 BOOL IsIphoneX(void);
 
 BOOL IsPortrait(void);
+
+
 
 //获取自1970/1/1到现在的精确秒数，精确到微秒
 double GetAccurateSecondsSince1970(void);

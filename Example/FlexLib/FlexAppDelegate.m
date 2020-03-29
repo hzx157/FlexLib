@@ -11,54 +11,35 @@
 
 #import "FlexAppDelegate.h"
 #import "FlexViewController.h"
+#import <SSZipArchive/ZipArchive.h>
 #import <objc/runtime.h>
 @implementation FlexAppDelegate
 
-- (void)setObj:(NSString *)value {
-
-  if (!class_getProperty(self.class, "backProperty")) {
+-(void)zip{
     
-    objc_property_attribute_t type = { "T", [[NSString stringWithFormat:@"@\"%@\"",NSStringFromClass([value class])] UTF8String] };
+    NSLog(@"----%@",[FlexNode getCacheDir]);
     
-    objc_property_attribute_t ownership = { "&", "N" };
     
-    objc_property_attribute_t backingivar  = { "V", [[NSString stringWithFormat:@"_%@", @"backProperty"] UTF8String] };
-    
-    objc_property_attribute_t attr[] = {type, ownership, backingivar};
-    
-//  NSLog(@"%d,", class_addProperty(self.class, "backProperty", attr, 3));
-    
-//    class_addMethod(self.class, @selector(setBackObj:), (IMP)setBackProperty, "V@:@");
-    
-//    class_addMethod(self.class, @selector(backObj), (IMP)getBackProperty, "@@:");
-  }
-  
-//  [self performSelector:@selector(setBackObj:) withObject:value];
+    [SSZipArchive unzipFileAtPath:[[NSBundle mainBundle]pathForResource:@"xml" ofType:@"zip"] toDestination:[FlexNode getCacheDir] overwrite:YES password:nil progressHandler:^(NSString * _Nonnull entry, unz_file_info zipInfo, long entryNumber, long total) {
+        
+        NSLog(@"------%@",entry);
+        
+    } completionHandler:^(NSString * _Nonnull path, BOOL succeeded, NSError * _Nullable error) {
+        NSLog(@"--%@,%d,%@",path,succeeded,error);
+    }];
 }
 
-//id getBackProperty(id self, SEL sel) {
-//
-//  Ivar ivar = class_getInstanceVariable(KVOObject.class , "_obj");
-//
-//  return object_getIvar(self, ivar);
-//}
-//
-//void setBackProperty(id self, SEL _sel, TestObj *obj) {
-//
-//  Ivar ivar = class_getInstanceVariable(KVOObject.class , "_obj");
-//
-//  id old = object_getIvar(self, ivar);
-//
-//  if (old != obj) {
-//
-//    object_setIvar(self, ivar, obj);
-//  }
-//}
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    [self setObj:@"xx"];
-    FlexRestoreIsNetSetter(YES);
+    [self zip];
+      NSLog(@"--解析完成--%@",[FlexNode getCacheDir]);
+    
+    //必须设置，更新文件xml.zip和img.zip
+    FlexSetDownloadDir(@"xml", @"img");
+    FlexColorDictionary(@{@"#ffffff":@"#000000"}); //设置暗黑颜色dict
+    FlexRestoreIsNetSetter(YES); //设置可以动态模块
+    FlexEnableCache(YES);
     FlexRestorePreviewSetting();
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

@@ -15,12 +15,14 @@ PODS:
     - SDWebImage/Core (= 5.5.2)
   - SDWebImage/Core (5.5.2)
   - Specta (1.0.7)
+  - SSZipArchive (2.2.2)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
   - Expecta
   - FlexLib (from `../`)
   - Specta
+  - SSZipArchive
   - Yoga (= 1.14.0)
 
 SPEC REPOS:
@@ -30,6 +32,7 @@ SPEC REPOS:
     - Yoga
   trunk:
     - SDWebImage
+    - SSZipArchive
 
 EXTERNAL SOURCES:
   FlexLib:
@@ -40,8 +43,9 @@ SPEC CHECKSUMS:
   FlexLib: f3a84457c1b381c3c8a26ce55f84d4feda14bb57
   SDWebImage: 4d5c027c935438f341ed33dbac53ff9f479922ca
   Specta: 3e1bd89c3517421982dc4d1c992503e48bd5fe66
+  SSZipArchive: fa16b8cc4cdeceb698e5e5d9f67e9558532fbf23
   Yoga: cff67a400f6b74dc38eb0bad4f156673d9aa980c
 
-PODFILE CHECKSUM: 1a850782b74573e1035fd795aff5ff424bd1a378
+PODFILE CHECKSUM: 19f3c4b3a5d238001bb5347e934c5f1c4424f46e
 
 COCOAPODS: 1.8.4

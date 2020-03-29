@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		101214CAF97E3CADF2C985A4 /* libPods-FlexLib_Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4959FDDA4B59C6AB6BCBC7A /* libPods-FlexLib_Tests.a */; };
+		4E4E87452430D056002DD2BC /* xml.zip in Resources */ = {isa = PBXBuildFile; fileRef = 4E4E87442430D056002DD2BC /* xml.zip */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -143,6 +144,7 @@
 /* Begin PBXFileReference section */
 		0A51394BE4DAFCF85348261A /* FlexLib.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = FlexLib.podspec; path = ../FlexLib.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2D3FCC96F52EF608017FEEF8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		4E4E87442430D056002DD2BC /* xml.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = xml.zip; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* FlexLib_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlexLib_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -407,6 +409,7 @@
 		6003F593195388D20070C39A /* Example for FlexLib */ = {
 			isa = PBXGroup;
 			children = (
+				4E4E87442430D056002DD2BC /* xml.zip */,
 				D24F2EBD1FF687C400762ADC /* AttachmentView.h */,
 				D24F2EBE1FF687C400762ADC /* AttachmentView.m */,
 				D26F59E31FE4B80F0007CB46 /* TextViewVC.h */,
@@ -790,6 +793,7 @@
 				D272A8C41FD933990075DB1D /* TestScrollVC.xml in Resources */,
 				D26262851FE3D24A000F9841 /* alignItems.xml in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
+				4E4E87452430D056002DD2BC /* xml.zip in Resources */,
 				D2CF9CC51FD7EB0900554A0C /* test.xml in Resources */,
 				D272B7851FEF670F004447E2 /* Localizable.strings in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,

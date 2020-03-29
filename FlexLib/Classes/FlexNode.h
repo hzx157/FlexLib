@@ -15,6 +15,7 @@
 #define FLEXBASEURL     @"flexPreviewBaseUrl"
 #define FLEXONLINELOAD  @"flexOnlineLoadRes"
 #define FLEXINDEXNAME   @"_flexres.idx"
+#define FLEXIMGDIR   @"FLEXIMGDIR"   //图片文件夹
 
 @class FlexRootView;
 @class YGLayout;

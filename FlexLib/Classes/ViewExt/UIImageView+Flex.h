@@ -11,7 +11,7 @@
 
 
 @interface UIImageView (Flex)
-
+@property (nonatomic,strong)UIImage *runtimeImage;
 
 @end
 

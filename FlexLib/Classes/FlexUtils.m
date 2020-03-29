@@ -16,6 +16,8 @@
 
 static FlexMapColor gMapColor = NULL;
 
+static NSDictionary *colorDictionary = nil;
+
 static NSString* _gclrs[]=
 {
     @"black",   @"#0",
@@ -35,6 +37,10 @@ static NSString* _gclrs[]=
     @"brown",   @"#996633",
 };
 
+void FlexColorDictionary(NSDictionary *dict){
+    colorDictionary = dict;
+    
+}
 UIColor* systemColor(NSString* clr)
 {
     NSString* methodDesc = [NSString stringWithFormat:@"%@Color",clr];
@@ -71,6 +77,38 @@ UIColor* systemColor(NSString* clr)
 UIColor* colorFromString(NSString* clr,
                          NSObject* owner)
 {
+    
+     
+    if (@available(iOS 13.0, *)) {
+      return [UIColor colorWithDynamicProvider:^UIColor * (UITraitCollection *  traitCollection) {
+          if(traitCollection.userInterfaceStyle == UIUserInterfaceStyleLight){
+              return colorFromStringToTraitCollection(clr, owner);
+          }else{
+              if(colorDictionary.allKeys.count == 0){ //安全起见
+                  colorDictionary = [NSDictionary new];
+              }
+              NSString *darkColor = [colorDictionary objectForKey:clr];
+              if(darkColor){
+                 return  colorFromStringToTraitCollection(darkColor, owner);
+              }else{
+                  return colorFromStringToTraitCollection(clr, owner);
+              }
+             
+          }
+        }];
+    } else {
+        
+       
+        return colorFromStringToTraitCollection(clr, owner);
+    }
+    
+   
+}
+
+UIColor* colorFromStringToTraitCollection(NSString* clr,
+                         NSObject* owner)
+{
+    
     if(![clr hasPrefix:@"#"]){
         
         if([clr rangeOfString:@"."].length>0){
@@ -112,12 +150,14 @@ UIColor* colorFromString(NSString* clr,
     if (gMapColor!=NULL) {
         gMapColor(&r,&g,&b,&a);
     }
-    
+   
     return [UIColor colorWithRed:r / 255.0f
                            green:g / 255.0f
                             blue:b / 255.0f
                            alpha:a / 255.0f];
 }
+
+
 
 UIFont* fontFromString(NSString* fontStr)
 {
