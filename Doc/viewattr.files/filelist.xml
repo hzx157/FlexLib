@@ -2,4 +2,6 @@
  <o:MainFile HRef="::viewattr.htm"/>
  <o:File HRef="themedata.xml"/>
  <o:File HRef="filelist.xml"/>
-</xml>
+</xml
+
+<?xml version="1.0" encoding="UTF-8"?>

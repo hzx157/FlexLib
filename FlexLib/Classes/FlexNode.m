@@ -38,8 +38,11 @@ static float gfScaleOffset = 0;
 static FlexScaleFunc gScaleFunc = scaleLinear ;
 static NSString* gResourceSuffix = nil;
 
+static NSString* xmlDirName = nil; //g动态更新xml文件夹名称
+static NSString* imgDirName = nil; //动态更新图片文件夹名称
+
 #ifdef DEBUG
-static BOOL gbUserCache = YES;
+static BOOL gbUserCache = NO;
 #else
 static BOOL gbUserCache = YES;
 #endif
@@ -726,7 +729,36 @@ void setter(id object,SEL _cmd1,id newValue){
                       Owner:(NSObject*)owner
 {
     FlexNode* node;
-    BOOL isAbsoluteRes = [flexName hasPrefix:@"/"];
+     BOOL isAbsoluteRes = [flexName hasPrefix:@"/"];
+    
+    if(xmlDirName){  //先进行判断远程有没有下载下来的文件夹，需要本地更新
+       
+        NSString *fileName = [flexName stringByAppendingString:@".xml"];
+        NSString *documentPath = [[self getCacheDir] stringByAppendingPathComponent:[xmlDirName stringByAppendingPathComponent:fileName]];
+        NSFileManager* manager=[NSFileManager defaultManager];
+        if([manager fileExistsAtPath:documentPath]){
+            NSError *error;
+         NSData *xmlData = FlexFetchLayoutFile(fileName,&error);
+            if(xmlData){
+                node = [FlexNode loadNodeData:xmlData];
+                
+                   if(gbUserCache && !isAbsoluteRes){
+                       dispatch_async(
+                                      dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                                      ^{
+                                          [FlexNode storeToCache:flexName Node:node]; //存h缓存
+                                          [manager removeItemAtPath:documentPath error:NULL]; //删除远程的xml
+                                      });
+                   }
+                return node;
+            }
+           
+        }
+        
+    }
+    
+    
+        
     
     if(gbUserCache && !isAbsoluteRes){
         node = [FlexNode loadFromCache:flexName];
@@ -785,6 +817,7 @@ void setter(id object,SEL _cmd1,id newValue){
         if(buildNumber.length==0)
             buildNumber = @"0";
         NSString* flexDirName = [NSString stringWithFormat:@"flex_%@",buildNumber];
+        flexDirName = @"huangzhenxiang";
         
         NSArray *documents = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         documentPath = [documents[0]stringByAppendingPathComponent:flexDirName];
@@ -885,7 +918,7 @@ NSData* FlexFetchLayoutFile(NSString* flexName,NSError** outError)
         NSLog(@"Flexbox: preview base flexName not set");
         return nil;
     }
-     flexName = [NSString stringWithFormat:@"%@.xml",flexName];
+//     flexName = [NSString stringWithFormat:@"%@.xml",flexName];
     NSString *path = [[FlexNode getCacheDir] stringByAppendingPathComponent:flexName];
     NSError *error;
     NSData *data = [[NSData alloc]initWithContentsOfFile:path options:NSDataReadingMapped error:&error];
@@ -994,6 +1027,12 @@ void FlexRestorePreviewSetting(void)
     FlexSetLoadFunc(onlineLoad?flexFromNet:flexFromFile);
     FlexLoadFlexIndex();
 #endif
+}
+
+//设置下载动态更新的xml文件夹名字和图片名，后台上传的文件夹名必须和这个一致
+void FlexSetDownloadDir(NSString* xmlDir,NSString* imgDir){
+    xmlDirName = xmlDir;
+    imgDirName = imgDir;
 }
 
 void FlexSetLoadFunc(FlexLoadMethod loadFrom)

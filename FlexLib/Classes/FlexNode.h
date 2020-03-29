@@ -32,9 +32,13 @@ typedef enum{
 
 #pragma mark - global functions
 
+//设置下载动态更新的xml文件夹名字和图片名，后台上传的文件夹名必须和这个一致
+void FlexSetDownloadDir(NSString* xmlDir,NSString* imgDir);
 // 注意: 下面这些设置的资源加载方式函数是同步调用
 // 如果从网络获取资源可能会导致界面阻塞
 // 设置资源加载方式：网络 or 本地文件
+
+
 void FlexSetLoadFunc(FlexLoadMethod loadFrom);
 
 // 设置自定义资源加载方式

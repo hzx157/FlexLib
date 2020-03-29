@@ -760,7 +760,7 @@ void FlexApplyLayoutParam(YGLayout* layout,
          ];
     [manager createDirectoryAtPath:sCacheDir withIntermediateDirectories:YES attributes:nil error:nil];
 }
-+(NSString*)getResCachePath:(NSString*)flexName
++(NSString*)`getResCachePath:(NSString*)flexName
 {
     NSString* sFilePath = [FlexNode getCacheDir];
     sFilePath = [sFilePath stringByAppendingPathComponent:flexName];

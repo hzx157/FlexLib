@@ -144,6 +144,9 @@ FlexTextView是另外一个系统提供的类，能够自动根据输入的文�
 
 ![智能提示](https://raw.githubusercontent.com/zhenglibao/FlexLib/master/Doc/res/intellisense.gif)
 
+记得添加NativeScript XML Snippets插件，该插件提供自动补全
+
+
 ### 该框架能和Autolayout、Frame方式混用吗？
 
 当然可以，可以一部分页面使用Autolayout，另外一部分页面使用xml。甚至在同一个页面也可以一部分控件使用frame方式布局，另外一部分控件使用xml方式。具体使用方式可以参考[这里](https://github.com/zhenglibao/FlexLib/wiki/%E5%9C%A8%E4%B8%80%E4%B8%AA%E9%A1%B5%E9%9D%A2%E4%B8%AD%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8%E4%BC%A0%E7%BB%9Fframe%E5%B8%83%E5%B1%80%E5%92%8Cflex%E5%B8%83%E5%B1%80)

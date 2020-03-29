@@ -77,6 +77,7 @@ static NameValue _gcontentModes[] =
 FLEXSET(bgColor)
 {
     UIColor* clr = colorFromString(sValue,owner) ;
+    
     if(clr!=nil){
         self.backgroundColor = clr ;
     }

@@ -31,6 +31,6 @@ FlexRootView的大小为 (414-safeArea.left-safeaArea.right)x(736-safeArea.top-s
 默认情况下FlexBaseVC::getSafeArea会根据屏幕方向、是否带有导航栏等返回对应的safeArea的值。如果想要调整默认的FlexRootView的区域，可以重写getSafeArea方法。
 
 另外在带有导航栏的视图控制器中，有时会由于其他属性（如navibar.translucent,automaticallyAdjustsScrollViewInsets等熟悉）会修改控制器的view的frame变成非全屏状态，此时也需要重写getSafeArea方法，来调整FlexRootView所占据的区域。
-
+ 
 
 
