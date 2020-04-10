@@ -30,19 +30,19 @@ static char *kFlexImageKey = "kImageKey";
                 
             }
         }
- 
-    NSString *imgDir = [[NSUserDefaults standardUserDefaults]objectForKey:FLEXIMGDIR];
-    if(![sValue hasSuffix:@".png"]){
-      imgDir = [imgDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",sValue]];
-    }else{
+   if (@available(iOS 13.0, *)) {
+       NSString *imgDir = [[NSUserDefaults standardUserDefaults]objectForKey:FLEXIMGDIR];
+      if(![sValue hasSuffix:@".png"]){
+            imgDir = [imgDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",sValue]];
+       }else{
          imgDir = [imgDir stringByAppendingPathComponent:sValue];
-    }
+     }
     
     NSString *documentPath = [[FlexNode getCacheDir] stringByAppendingPathComponent:imgDir];
-    NSLog(@"-图片缓存图片--%@",documentPath);
+//    NSLog(@"-图片缓存图片--%@",documentPath);
     NSFileManager* manager=[NSFileManager defaultManager];
     if([manager fileExistsAtPath:documentPath]){
-        if (@available(iOS 13.0, *)) {
+      
                  if (UITraitCollection.currentTraitCollection.userInterfaceStyle == UIUserInterfaceStyleDark) {
                     NSString *documentPathDark = [documentPath stringByReplacingOccurrencesOfString:@".png" withString:@"dark.png"];
                      NSString *documentPath2x = [documentPath stringByReplacingOccurrencesOfString:@".png" withString:@"dark@2x.png"];
@@ -54,12 +54,12 @@ static char *kFlexImageKey = "kImageKey";
                      
                          
                  }
-             }
-        return [UIImage imageWithContentsOfFile:documentPath];
-    }else{
+           
+           return [UIImage imageWithContentsOfFile:documentPath];
+       }else{
         
+      }
     }
-    
    return [UIImage imageNamed:sValue inBundle:[owner bundleForImages] compatibleWithTraitCollection:nil];
    
 }

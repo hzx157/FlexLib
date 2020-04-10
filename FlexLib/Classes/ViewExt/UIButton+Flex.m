@@ -13,7 +13,7 @@
 #import "UIView+Flex.h"
 #import <objc/runtime.h>
 #import "../FlexUtils.h"
-
+#import "../FlexNode.h"
 
 @implementation UIButton (Flex)
 FLEXSET(text)
@@ -31,4 +31,16 @@ FLEXSET(color)
         [self setTitleColor:clr forState:UIControlStateNormal];
     }
 }
+FLEXSET(buttonFontSize)
+{
+    self.titleLabel.font = [UIFont systemFontOfSize:[sValue floatValue]];
+}
+
+FLEXSET(buttonBackgroundImage)
+{
+    UIImage* img = [UIImage imageNamed:sValue inBundle:[owner bundleForImages] compatibleWithTraitCollection:nil];
+    [self setBackgroundImage:img forState:UIControlStateNormal];
+}
+
+
 @end

@@ -66,6 +66,7 @@ static NSString *identifier = @"TestTableCellIdentifier";
         [weakSelf loadInBackground];
     });
 }
+
 -(void)loadInBackground
 {
     NSArray* datas =

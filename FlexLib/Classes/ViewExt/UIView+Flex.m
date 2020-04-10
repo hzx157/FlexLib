@@ -121,6 +121,7 @@ FLEXSET(borderColor)
 }
 FLEXSET(borderRadius)
 {
+    self.layer.masksToBounds = YES;
     CGFloat f = [sValue floatValue] ;
     self.layer.cornerRadius = f ;
 }

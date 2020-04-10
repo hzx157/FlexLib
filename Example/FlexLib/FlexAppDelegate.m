@@ -13,6 +13,7 @@
 #import "FlexViewController.h"
 #import <SSZipArchive/ZipArchive.h>
 #import <objc/runtime.h>
+#import "TestTableVC.h"
 @implementation FlexAppDelegate
 
 -(void)zip{

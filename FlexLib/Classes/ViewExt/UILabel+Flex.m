@@ -312,6 +312,16 @@ FLEXSET(fontSize)
         self.font = font;
     }
 }
+
+FLEXSET(boldFontSize)
+{
+    float nSize = [sValue floatValue];
+    if(nSize > 0){
+        UIFont* font = [UIFont boldSystemFontOfSize:nSize];
+        self.font = font;
+    }
+}
+
 FLEXSET(lineBreakMode)
 {
     NSInteger n = NSString2Int(sValue,

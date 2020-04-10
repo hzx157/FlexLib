@@ -1112,6 +1112,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlexLib/FlexLib-Prefix.pch";
 				INFOPLIST_FILE = "FlexLib/FlexLib-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hpbr.bosszhipin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1131,6 +1132,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlexLib/FlexLib-Prefix.pch";
 				INFOPLIST_FILE = "FlexLib/FlexLib-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = com.hpbr.bosszhipin;
 				PRODUCT_NAME = "$(TARGET_NAME)";
